@@ -54,13 +54,13 @@ function App() {
       .post("https://bulkmail-backend-h49k.onrender.com/sendemail", { msg, emailList })
       .then((res) => {
         if (res.data.success) {
-          alert("Emails sent successfully!");
+          alert(res.data.message || "Emails sent successfully!");
         } else {
-          alert("Failed to send emails: " + res.data.message);
-        }
+          alert("Failed to send emails.");
+        }        
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Send error:", err?.response?.data || err.message);
         alert("An error occurred while sending emails.");
       })
       .finally(() => {
